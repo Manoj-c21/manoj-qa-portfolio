@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manoj C - QA Engineer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: #333; overflow-x: hidden; }
+        
+        /* Header */
+        header { position: fixed; width: 100%; background: rgba(15, 15, 30, 0.95); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 0; transition: all 0.3s ease; }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { color: #00d4ff; font-size: 1.5rem; font-weight: 700; text-decoration: none; }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 400; transition: color 0.3s; }
+        .nav-links a:hover { color: #00d4ff; }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; }
+        .hamburger span { width: 25px; height: 3px; background: white; margin: 3px 0; transition: 0.3s; }
+        
+        /* Hero Section */
+        #home { height: 100vh; background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%); display: flex; align-items: center; justify-content: center; text-align: center; color: white; }
+        .hero-content h1 { font-size: 4rem; font-weight: 700; margin-bottom: 1rem; background: linear-gradient(45deg, #00d4ff, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: fadeInUp 1s ease; }
+        .hero-content p { font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9; animation: fadeInUp 1s ease 0.2s both; }
+        .cta-button { display: inline-block; padding: 15px 30px; background: linear-gradient(45deg, #00d4ff, #0099cc); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: transform 0.3s, box-shadow 0.3s; animation: fadeInUp 1s ease 0.4s both; }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4); }
+        
+        /* Sections */
+        section { padding: 100px 0; max-width: 1200px; margin: 0 auto; padding-left: 2rem; padding-right: 2rem; }
+        h2 { font-size: 3rem; text-align: center; margin-bottom: 3rem; background: linear-gradient(45deg, #00d4ff, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* About */
+        #about { background: #f8f9ff; }
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .about-text p { font-size: 1.1rem; margin-bottom: 1.5rem; }
+        .skills { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
+        .skill-tag { background: #00d4ff; color: white; padding: 0.5rem 1rem; border-radius: 25px; font-size: 0.9rem; }
+        
+        /* Projects */
+        #projects { background: #f8f9ff; }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+        .project-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; }
+        .project-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.15); }
+        .project-card img { width: 100%; height: 250px; object-fit: cover; }
+        .project-info { padding: 1.5rem; }
+        .project-info h3 { margin-bottom: 0.5rem; color: #0f0f1e; }
+        .project-links { margin-top: 1rem; }
+        .project-links a { display: inline-block; margin-right: 1rem; color: #00d4ff; font-weight: 600; }
+        
+        /* Certificates - NEW SECTION 1 */
+        #certificates { background: linear-gradient(135deg, #f8f9ff 0%, #e8f4fd 100%); }
+        .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .cert-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; position: relative; }
+        .cert-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,212,255,0.3); }
+        .cert-card img { width: 100%; height: 200px; object-fit: cover; }
+        .cert-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, rgba(0,212,255,0.9), rgba(255,107,157,0.9)); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+        .cert-card:hover .cert-overlay { opacity: 1; }
+        .cert-overlay i { font-size: 3rem; color: white; }
+        .cert-info { padding: 1.5rem; text-align: center; }
+        .cert-info h3 { color: #0f0f1e; margin-bottom: 0.5rem; }
+        .cert-date { color: #00d4ff; font-weight: 600; }
+        
+        /* Certifications - NEW SECTION 2 */
+        #certifications { background: #f8f9ff; }
+        .certs-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .cert-item { background: white; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s; border-left: 5px solid #00d4ff; }
+        .cert-item:hover { transform: translateY(-5px); }
+        .cert-item i { font-size: 3rem; color: #00d4ff; margin-bottom: 1rem; }
+        .cert-item h4 { color: #0f0f1e; margin-bottom: 0.5rem; }
+        .cert-item p { color: #666; font-size: 0.95rem; }
+        
+        /* Contact */
+        #contact { background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%); color: white; text-align: center; }
+        .contact-content { max-width: 600px; margin: 0 auto; }
+        .social-links { display: flex; justify-content: center; gap: 2rem; margin: 2rem 0; }
+        .social-links a { color: white; font-size: 1.5rem; transition: color 0.3s; }
+        .social-links a:hover { color: #00d4ff; }
+        
+        /* Animations */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links { position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px); background: #0f0f1e; flex-direction: column; justify-content: start; align-items: center; padding-top: 2rem; transition: 0.3s; }
+            .nav-links.active { left: 0; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .about-content { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+            section { padding-left: 1rem; padding-right: 1rem; }
+            .certs-grid, .certs-list { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" class="logo">Manoj C</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <!-- <li><a href="#certificates">Certificates</a></li> -->
+                <a href="#certificates">Certifications</a>
+
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div class="hero-content">
+            <h1>Manoj C</h1>
+            <p>QA Engineer & Automation Specialist ensuring flawless software quality</p>
+            <a href="#projects" class="cta-button">View My Work</a>
+        </div>
+    </section>
+
+    <section id="about" class="fade-in">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>QA Engineer with strong knowledge of Software Testing methodologies, SDLC models, Agile frameworks, and Defect Management tools. Skilled in Manual Testing, including designing effective test cases, test plans, and defect reporting, as well as Automation Testing using Selenium. Adept at ensuring software quality and delivering high quality products. Seeking an entry-level opportunity to leverage both Manual and Automation testing skills to contribute effectively to a QA team
+
+translate to a short anf attractive words</p>
+                <div class="skills">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Selenium</span>
+                    <span class="skill-tag">Automation TestNG</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">Selenium WebDriver</span>
+                    <span class="skill-tag">Manual Testing</span>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <img src="prof.jpeg" alt="Manoj C" style="width: 100%; max-width: 400px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="fade-in">
+        <h2>My Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="ai-ad-drinks-1760177443311.png" alt="AI Products Ads">
+                <div class="project-info">
+                    <h3>AI-Products Ads Generator</h3>
+                    <p>AI-powered product advertisement generator using Next.js, React, and Stability AI.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/Manoj-c21/ai-product-ads-generator" target="_blank"><i class="fab fa-github"></i> Code</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW CERTIFICATE SECTION 1 -->
+    <section id="certificates" class="fade-in">
+    <h2>🏆 Certifications</h2>
+    <div class="certs-container">
+        <!-- Certificate 1 -->
+        <div class="cert-showcase">
+            <div class="cert-frame">
+                <img src="Screenshot_10-2-2026_162257_udemy-certificate.s3.amazonaws.com.jpeg" alt="MasterClass Software Testing with Jira & Agile" loading="lazy">
+                <div class="cert-badge">
+                    <i class="fas fa-medal"></i>
+                    <span>VERIFIED</span>
+                </div>
+            </div>
+            <div class="cert-details">
+                <h3>Manual Testing Mastery</h3>
+                <div class="cert-meta">
+                    <span class="cert-platform">🎓 Udemy</span>
+                    <span class="cert-date">Sept 2025</span>
+                </div>
+                <p>Comprehensive Jira & Agile testing methodologies for professional QA delivery</p>
+                <div class="cert-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                    <span>100% Complete</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certificate 2 -->
+        <div class="cert-showcase">
+            <div class="cert-frame">
+                <img src="Screenshot_10-2-2026_162652_www.udemy.com.jpeg" alt="Python Programming & Selenium Python Automation" loading="lazy">
+                <div class="cert-badge">
+                    <i class="fas fa-medal"></i>
+                    <span>VERIFIED</span>
+                </div>
+            </div>
+            <div class="cert-details">
+                <h3>Python + Selenium Automation</h3>
+                <div class="cert-meta">
+                    <span class="cert-platform">🎓 Udemy</span>
+                    <span class="cert-date">OCT 2025</span>
+                </div>
+                <p>End-to-end automation framework development with Python & Selenium WebDriver</p>
+                <div class="cert-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                    <span>100% Complete</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- NEW CERTIFICATIONS SECTION 2 -->
+    <!-- <section id="certifications" class="fade-in">
+        <h2>Certifications</h2>
+        <div class="certs-list">
+            <div class="cert-item">
+                <i class="fas fa-graduation-cap"></i>
+                <h4>TestNG Framework</h4>
+                <p>Mastery in TestNG annotation-based test execution and reporting</p>
+            </div>
+            <div class="cert-item">
+                <i class="fas fa-database"></i>
+                <h4>SQL for Testers</h4>
+                <p>Database testing and query optimization for QA professionals</p>
+            </div>
+            <div class="cert-item">
+                <i class="fas fa-file-alt"></i>
+                <h4>Manual Testing</h4>
+                <p>Comprehensive manual testing methodologies and defect lifecycle</p>
+            </div>
+            <div class="cert-item">
+                <i class="fas fa-cogs"></i>
+                <h4>Agile Testing</h4>
+                <p>Agile/Scrum testing practices and continuous integration</p>
+            </div>
+        </div>
+    </section> -->
+
+    <section id="contact" class="fade-in">
+        <div class="contact-content">
+            <h2>Let's Work Together</h2>
+            <p>Need flawless software testing? Let's build robust QA solutions together!</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/manoj-c-93813b28b" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/Manoj-c21" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="mailto:manojnayaka018@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p style="opacity: 0.8;">manojnayaka018@gmail.com | 9620673876 | Bengaluru, India</p>
+        </div>
+    </section>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Fade in animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(15, 15, 30, 0.98)';
+            } else {
+                header.style.background = 'rgba(15, 15, 30, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
